@@ -26,15 +26,15 @@ export class UserLoginFormComponent {
     this.fetchApiData.userLogin(this.userData).subscribe((result) => {
       let user = result.user.Username;
       let token = result.token;
-      localStorage.setItem('user', user);
+      localStorage.setItem('user', user.Username);
       localStorage.setItem('token', token);
       console.log(user, token);
-      this.dialogRef.close();
-      this.router.navigate(['movies']);
-      this.snackBar.open('user registered successfully', 'OK', { duration: 2000 });
-    }, (response) => {
-      console.log(response);
-      this.snackBar.open(response, 'OK', { duration: 2000 });
+      this.dialogRef.close();       // close modal
+      // this.router.navigate(['movies']);
+      this.snackBar.open('user login successfull', 'OK', { duration: 2000 });
+    }, (result) => {
+      console.log(result);
+      this.snackBar.open('user login failed', 'OK', { duration: 2000 });
     });
   }
 }
