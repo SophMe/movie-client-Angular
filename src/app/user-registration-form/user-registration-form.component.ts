@@ -18,8 +18,7 @@ export class UserRegistrationFormComponent implements OnInit {
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
     public snackBar: MatSnackBar ) {}   // display notifications back to the user
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   // send form inputs to the backend
   registerUser(): void {
