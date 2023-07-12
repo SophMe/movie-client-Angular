@@ -1,7 +1,31 @@
+<div style="display: flex;">
 <!-- ngFor directive displays all returned movies, each in its own card -->
-<mat-card *ngFor="let movie of movies; let i=index;">         <!-- 'movies' is the variable with the empty array declared in 'movie-card.component' -->
-  <mat-dialog-content>
+  <mat-card *ngFor="let movie of movies;" let i=index; style="flex: 1 1 auto;">         <!-- 'movies' is the variable with the empty array declared in 'movie-card.component' -->
+    <mat-card-header>
       <mat-card-title>{{movie.Title}}</mat-card-title>
-      <mat-card-subtitle><img src={{movie.ImagePath}}/></mat-card-subtitle>
-  </mat-dialog-content>
+          <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
+      </mat-card-header>
+      <img src={{movie.ImagePath}} alt= {{movie.Title}} />
+      <mat-card-actions>
+          <button
+              mat-button
+              color="primary"
+          >
+              Genre
+          </button>
+          <button
+              mat-button
+              color="primary"
+          >
+              Director
+          </button>
+          <button
+              mat-button
+              color="primary"
+          >
+              Synopsis
+          </button>
+          <mat-icon>favorite_border</mat-icon>
+      </mat-card-actions>
 </mat-card>
+</div>
