@@ -27,18 +27,21 @@ export class UserRegistrationService {
   
   // user login
   public userLogin(userDetails: any): Observable<any> {
-    console.log(userDetails);
-    return this.http
-      .post(apiUrl + 'login', userDetails)
-      .pipe(catchError(this.handleError));
-  }
+  console.log(userDetails);
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders({ Authorization: 'Bearer ' + token });
+  return this.http
+    .post(apiUrl + 'login', userDetails, { headers: headers })
+    .pipe(catchError(this.handleError));
+}
+
 
   // get all movies
   getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
       .get(apiUrl + 'movies', {headers: new HttpHeaders(
-      {Authorization: 'Bearer' + token,})})
+      {Authorization: 'Bearer ' + token,})})
       .pipe(map((response: any) => this.extractResponseData(response)), catchError(this.handleError));
   }
 
@@ -47,7 +50,7 @@ export class UserRegistrationService {
     const token = localStorage.getItem('token');
     return this.http
       .get(apiUrl + 'movies/' + title, {headers: new HttpHeaders(
-      {Authorization: 'Bearer' + token,})})
+      {Authorization: 'Bearer ' + token,})})
       .pipe(map((response: any) => this.extractResponseData(response)), catchError(this.handleError));
   }
 
@@ -56,7 +59,7 @@ export class UserRegistrationService {
     const token = localStorage.getItem('token');
     return this.http
       .get(apiUrl + 'movies/Director/' + name, {headers: new HttpHeaders(
-      {Authorization: 'Bearer' + token,})})
+      {Authorization: 'Bearer ' + token,})})
       .pipe(map((response: any) => this.extractResponseData(response)), catchError(this.handleError));
   }
 
@@ -65,7 +68,7 @@ export class UserRegistrationService {
     const token = localStorage.getItem('token');
     return this.http
       .get(apiUrl + 'movies/Genre/' + name, {headers: new HttpHeaders(
-      {Authorization: 'Bearer' + token,})})
+      {Authorization: 'Bearer ' + token,})})
       .pipe(map((response: any) => this.extractResponseData(response)), catchError(this.handleError));
   }
 
@@ -74,7 +77,7 @@ export class UserRegistrationService {
     const token = localStorage.getItem('token');
     return this.http
       .get(apiUrl + 'users' + name, {headers: new HttpHeaders(
-      {Authorization: 'Bearer' + token,})})
+      {Authorization: 'Bearer ' + token,})})
       .pipe(map((response: any) => this.extractResponseData(response)), catchError(this.handleError));
   }
 
@@ -84,7 +87,7 @@ export class UserRegistrationService {
     const userName = localStorage.getItem('user');
     return this.http
       .get(apiUrl + 'users/' + userName, {headers: new HttpHeaders(
-      {Authorization: 'Bearer' + token,})})
+      {Authorization: 'Bearer ' + token,})})
       .pipe(
         map((response: any) => this.extractResponseData(response)), 
         map((data) => data.FavoriteMovies), 
@@ -97,7 +100,7 @@ export class UserRegistrationService {
     const userName = localStorage.getItem('user');
     return this.http
       .post(apiUrl + 'users/' + userName + 'movies/' + movieId, {headers: new HttpHeaders(
-      {Authorization: 'Bearer' + token,})})
+      {Authorization: 'Bearer ' + token,})})
       .pipe(
         map((response: any) => this.extractResponseData(response)), 
         map((data) => data.FavoriteMovies),
@@ -110,7 +113,7 @@ export class UserRegistrationService {
     const userName = localStorage.getItem('user');
     return this.http
       .delete(apiUrl + 'users/' + userName + 'movies/' + movieId, {headers: new HttpHeaders(
-      {Authorization: 'Bearer' + token,})})
+      {Authorization: 'Bearer ' + token,})})
       .pipe(
         map((response: any) => this.extractResponseData(response)), 
         map((data) => data.FavoriteMovies),
@@ -123,7 +126,7 @@ export class UserRegistrationService {
     const userName = localStorage.getItem('user');
     return this.http
       .put(apiUrl + 'users/' + userName, updatedUser, {headers: new HttpHeaders(
-      {Authorization: 'Bearer' + token,})})
+      {Authorization: 'Bearer ' + token,})})
       .pipe(map((response: any) => this.extractResponseData(response)), catchError(this.handleError));
   }
 
@@ -133,7 +136,7 @@ export class UserRegistrationService {
     const userName = localStorage.getItem('user');
     return this.http
       .delete(apiUrl + 'users/' + userName, {headers: new HttpHeaders(
-      {Authorization: 'Bearer' + token,})})
+      {Authorization: 'Bearer ' + token,})})
       .pipe(map((response: any) => this.extractResponseData(response)), catchError(this.handleError));
   }
 
