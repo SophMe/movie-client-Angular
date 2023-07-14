@@ -1,31 +1,39 @@
-<div style="display: flex;">
+<div class="movie-cards-container">
 <!-- ngFor directive displays all returned movies, each in its own card -->
-  <mat-card *ngFor="let movie of movies;" let i=index; style="flex: 1 1 auto;">         <!-- 'movies' is the variable with the empty array declared in 'movie-card.component' -->
+  <mat-card *ngFor="let movie of movies;" class="movie-card">         <!-- 'movies' is the variable with the empty array declared in 'movie-card.component' -->
     <mat-card-header>
-      <mat-card-title>{{movie.Title}}</mat-card-title>
-          <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
+      <mat-card-title class="card-title">{{movie.Title}}</mat-card-title>
+          <mat-card-subtitle class="card-title">Directed by: {{movie.Director.Name}}</mat-card-subtitle>
       </mat-card-header>
-      <img src={{movie.ImagePath}} alt= {{movie.Title}} />
+      <div class="image-container">
+       <img class="movie-image" src={{movie.ImagePath}} alt= {{movie.Title}} />
+      </div>
+    <mat-card-footer>
       <mat-card-actions>
-          <button
-              mat-button
-              color="primary"
-          >
-              Genre
-          </button>
-          <button
-              mat-button
-              color="primary"
-          >
-              Director
-          </button>
-          <button
-              mat-button
-              color="primary"
-          >
-              Synopsis
-          </button>
-          <mat-icon>favorite_border</mat-icon>
+        <button class="mat-button"
+          mat-button
+          (click)="openDirector(movie.Director.Name, movie.Director.Bio)"
+          color="primary"
+        >
+          Director
+        </button>
+        <button class="mat-button"
+            mat-button
+            (click)="openDescription(movie.Description)"
+            color="primary"
+        >
+          Summary
+        </button>
+        <button class="mat-button"
+            mat-button
+            (click)="openGenre(movie.Genre.Name, movie.Genre.Description)"
+            color="primary"
+        >
+          <!-- {{movie.Genre.Name}} -->
+          Genre
+        </button>
+        <mat-icon>favorite_border</mat-icon>
       </mat-card-actions>
+    </mat-card-footer>
 </mat-card>
 </div>
