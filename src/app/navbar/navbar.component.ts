@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
+
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
 
@@ -19,8 +20,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    this.isLoggedIn = false;
-    this.router.navigate(['/login']);
+    localStorage.clear();
+    this.router.navigate(['/welcome']);
   }
 }

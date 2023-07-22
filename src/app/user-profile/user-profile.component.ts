@@ -28,6 +28,9 @@ export class UserProfileComponent implements OnInit{
     this.fetchUser();
   }
 
+  /**
+   * display user data and filter movies for their favorites
+   */
   fetchUser(): void {
     const username = localStorage.getItem('username');
     if (username) {
@@ -47,6 +50,9 @@ export class UserProfileComponent implements OnInit{
     }
   }
 
+  /**
+   * send updated data to db and save it in localStorage
+   */
   editUserData(): void {
     // Call the API to update the user data using the updatedUserData object
     this.fetchApiData.editUser(this.updatedUser).subscribe({
@@ -66,6 +72,9 @@ export class UserProfileComponent implements OnInit{
    });
   }
 
+  /**
+   * delete profile permanently and redirect to welcome page
+   */
   onDeleteUser(): void {
     this.fetchApiData.deleteUser().pipe(
       catchError((error) => {

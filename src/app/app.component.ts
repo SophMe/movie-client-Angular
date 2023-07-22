@@ -5,6 +5,10 @@ import { Component } from "@angular/core";
   styleUrls: ['./app.component.scss']
 })
 
+/**
+ * Entry point to app
+ */ 
+
 export class AppComponent {
   title = 'movie-client-Angular'
 }

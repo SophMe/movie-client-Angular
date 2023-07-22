@@ -10,6 +10,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
   templateUrl: './user-login-form.component.html',
   styleUrls: ['./user-login-form.component.scss']
 })
+
 export class UserLoginFormComponent implements OnInit {
   @Input() userData = { Username: '', Password: '' };
 
@@ -22,6 +23,10 @@ export class UserLoginFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
+/**
+ * store Username and token in localStorage
+ * redirect to movie view
+ */
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe({
       next: (result: any) => {
