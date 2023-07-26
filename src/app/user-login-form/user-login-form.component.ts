@@ -28,19 +28,18 @@ export class UserLoginFormComponent implements OnInit {
  * redirect to movie view
  */
   loginUser(): void {
-    this.fetchApiData.userLogin(this.userData).subscribe({
-      next: (result: any) => {
-        localStorage.setItem('user', result.user.Username);
+    this.fetchApiData.userLogin(this.userData).subscribe(
+      (result) => {
+        localStorage.setItem('username', result.user.Username);
         localStorage.setItem('token', result.token);
         console.log(result.user, result.token);
-        this.dialogRef.close(); // close modal
-        this.router.navigate(['movies']);
+        this.dialogRef.close();
         this.snackBar.open('user login successful', 'OK', { duration: 2000 });
+        this.router.navigate(['movies']);
       },
-      error: (error) => {
-        console.log(error);
+      (result) => {
+        console.log(result);
         this.snackBar.open('user login failed', 'OK', { duration: 2000 });
       }
-    });
-  }  
+    )}  
 }
