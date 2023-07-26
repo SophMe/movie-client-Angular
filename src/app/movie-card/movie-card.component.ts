@@ -13,6 +13,7 @@ import { MovieInfoComponent } from '../movie-info/movie-info.component';
 
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];          // array of type 'any' to hold movie data from API
+  favorites: string[] = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -22,6 +23,7 @@ export class MovieCardComponent implements OnInit {
 
   ngOnInit(): void {          // void is a type that represents absence of a value: function performs actions but does not return a value
     this.getMovies();         // fetch movies on component initialization
+    this. getFavoriteMovies();
   }
 
   /**
@@ -80,25 +82,27 @@ export class MovieCardComponent implements OnInit {
    * 
    * @param movieId movie id
    */
+  getFavoriteMovies(): void {
+    const username = localStorage.getItem('username');
+    if(username) {
+      this.fetchApiData.getUser(username).subscribe((resp) => {
+        this.favorites = resp.FavoriteMovies;
+        return this.favorites;
+      });
+    }
+  }
+
+  /**
+   * 
+   * @param movieId movie id
+   */
   addFavorite(id: string): void {
     this.fetchApiData.addFavMovie(id).subscribe((result) => {
       this.snackBar.open('Movie added to favorites.', 'OK', {
         duration: 2000
       });
+      this.ngOnInit();    // reload ngOnInit after adding a movie 
     });
-  }
-
-  /**
-  *
-  * @param movieId movie id
-  */
-  isFavorite(id: string): boolean {
-    const favorites = localStorage.getItem('favorites');
-    if (favorites) {
-      const favoriteMovies = JSON.parse(favorites) as string[];
-      return favoriteMovies.includes(id);
-    }
-    return false;
   }
 
   /**
@@ -110,20 +114,13 @@ export class MovieCardComponent implements OnInit {
       this.snackBar.open('Movie removed from favorites.', 'OK', {
         duration: 2000
       });
+      this.ngOnInit();
     });
   }
 
-  // addToFavMovies(movieId: string): void {
-  //   this.fetchApiData.addFavMovie(movieId).subscribe({
-  //     next: () => {
-  //       console.log('Movie added to favMovies');
-  //       this.snackBar.open('Movie added to favorites successfully', 'OK', { duration: 2000 });
-  //     },
-  //     error: (error) => {
-  //       console.log(error);
-  //       this.snackBar.open(error, 'OK', { duration: 2000 });
-  //     }
-  //   });
-  // }  
+
+  isFavorite(id: string): boolean {
+    return this.favorites.includes(id);    
+  }
 
 }
