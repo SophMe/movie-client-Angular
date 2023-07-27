@@ -15,6 +15,7 @@ import { FetchApiDataService } from '../fetch-api-data.service'
 export class UserProfileComponent implements OnInit{
   user: any = {};
   favMovies: any[] = [];
+  hasChanges: boolean = false;
 
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
   @Input() updatedUser = { Username: '', Password: '', Email: '', Birthday: '' };
@@ -42,27 +43,34 @@ export class UserProfileComponent implements OnInit{
         // change date format from db "2011-10-05T14:48:00.000Z"
         this.userData.Birthday = formatDate(this.user.Birthday, 'yyyy-MM-dd', 'en-US', 'UTC+0');
     
-        this.fetchApiData.getFavMovies().subscribe((favMovies: any) => {
-          this.favMovies = favMovies;
-          console.log(this.favMovies);
+        this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+          this.favMovies = resp.filter((m: { _id: any; }) => this.user.FavoriteMovies.indexOf(m._id) >= 0);
         });
       });
     }
   }
 
   /**
+   * handle input changes and check for changes in the user data
+   */
+  onInputChange(): void {
+    this.hasChanges = JSON.stringify(this.userData) !== JSON.stringify(this.updatedUser);
+  }
+
+  /**
    * send updated data to db and save it in localStorage
    */
   editUserData(): void {
-    // Call the API to update the user data using the updatedUserData object
+    // call the API to update the user data using the updatedUserData object
     this.fetchApiData.editUser(this.updatedUser).subscribe({
       next: (result) => {
         this.userData = this.updatedUser;
-        localStorage.setItem('user', JSON.stringify(this.userData)); // Save the updated user data to localStorage
+        localStorage.setItem('user', JSON.stringify(this.userData)); // save the updated user data to localStorage
 
         this.snackBar.open('User data successfully updated', 'OK', {
           duration: 2000
         });
+        location.reload();       // reload page after successful update
       },
       error: (error) => {
         this.snackBar.open(error, 'OK', {
