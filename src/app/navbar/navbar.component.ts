@@ -20,7 +20,8 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(): void {
-    localStorage.clear();
+    localStorage.removeItem('token');
+    this.isLoggedIn = false;
     this.router.navigate(['/welcome']);
   }
 }
