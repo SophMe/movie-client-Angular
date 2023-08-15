@@ -1,0 +1,39 @@
+.movie-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie-card {
+  width: 300px;
+  margin: 10px;
+  padding: 20px;
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+  .mat-button {
+    color: #333;
+  }
+}
+
+.card-title {
+  padding-bottom: 5px;
+}
+
+.image-container {
+  position: relative;
+  padding-bottom: 133.33%;
+}
+
+.movie-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the entire container */
+}
+
+mat-icon.is-favorite {
+  color: #3F51B5;
+}

@@ -1,0 +1,78 @@
+<div class="profile-container" style="padding: 20px;">
+
+  <h2>User Profile</h2>
+  <p>Username:  {{ user.Username }}</p>
+  <p>Email:  {{ user.Email }}</p>
+  <p>Birthday:  {{ user.Birthday }}</p>
+
+  <h3>Favorite Movies</h3>
+  <mat-list>
+    <mat-list-item *ngFor="let movie of favMovies">
+      <img matListItemAvatar src="{{movie.ImagePath}}" />
+      <div matListItemTitle>{{movie.Title}}</div>
+      <div matListItemLine>{{movie.Director.Name}}</div>
+    </mat-list-item>
+  </mat-list>
+
+  <br>
+  <br>
+  
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title class="title">Change your details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form>
+        <mat-form-field>
+          <input
+            matInput
+            [(ngModel)]="userData.Username"
+            type="text"
+            placeholder="Username"
+            name="Username"
+          >
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            [(ngModel)]="userData.Password"
+            type = "password"
+            placeholder="Password"
+            name="Password"
+          >
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            [(ngModel)]="userData.Email"
+            type = "email"
+            placeholder="Email"
+            name="Email"
+          >
+        </mat-form-field>
+        
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button
+          mat-raised-button
+          (click)="editUserData()"
+          color="primary"
+          class="btn-spacing"
+        >
+          Update
+        </button>
+        <button
+        mat-raised-button
+        (click)="onDeleteUser()"
+        color="warn"
+        class="btn-spacing"
+        >
+        Delete Profile
+       </button>
+    </mat-card-actions>
+  </mat-card>
+
+</div>

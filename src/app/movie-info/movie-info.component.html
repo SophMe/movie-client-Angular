@@ -1,0 +1,18 @@
+<h2>{{ data.title }}</h2>
+<p class="dialog-content">{{ data.content }}</p>
+
+<div *ngIf=" data.title === 'Genre' ">
+  <h3>{{ data.title }}</h3>
+  <p>{{ data.content }}</p>
+</div>
+
+<div *ngIf=" data.title === 'Director' ">
+  <h3>Director Information</h3>
+  <p>{{ data.content }}</p>
+</div>
+
+<!-- <div *ngIf=" data.title === 'Summary' && data.title !== data.content"> -->
+<div *ngIf=" data.title === 'Description' ">
+  <h3>Movie Summary</h3>
+  <p>{{ data.content }}</p>
+</div>

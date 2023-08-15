@@ -1,0 +1,18 @@
+<nav class="navbar">
+  <ul>
+    <li><a routerLink="/welcome">Start</a></li>
+    <li><a routerLink="/movies">Movies</a></li>
+    <li *ngIf="isLoggedIn"><a routerLink="/profile">Profile</a></li>
+    <li>
+      <button
+        *ngIf="isLoggedIn"
+        (click)="logout()"
+        class="logout-button"
+        routerLink="/welcome"
+      >
+        Logout
+      </button>
+    </li>
+  </ul>
+  
+</nav>
