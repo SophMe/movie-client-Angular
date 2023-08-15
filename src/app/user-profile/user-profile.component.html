@@ -1,10 +1,9 @@
-<!-- user-profile.component.html -->
 <div class="profile-container" style="padding: 20px;">
 
   <h2>User Profile</h2>
-  <p>Username:  {{ userData.Username }}</p>
-  <p>Email:  {{ userData.Email }}</p>
-  <p>Birthday:  {{ userData.Birthday }}</p>
+  <p>Username:  {{ user.Username }}</p>
+  <p>Email:  {{ user.Email }}</p>
+  <p>Birthday:  {{ user.Birthday }}</p>
 
   <h3>Favorite Movies</h3>
   <mat-list>
@@ -27,43 +26,33 @@
         <mat-form-field>
           <input
             matInput
-            [(ngModel)]="updatedUser.Username"
-            (ngModelChange)="onInputChange()"
-            placeholder="Username"
+            [(ngModel)]="userData.Username"
             type="text"
+            placeholder="Username"
             name="Username"
-            required
           >
-          </mat-form-field>
-          <!-- <mat-form-field>
+        </mat-form-field>
+
+        <mat-form-field>
           <input
             matInput
-            [(ngModel)]="updatedUser.Password"
+            [(ngModel)]="userData.Password"
             type = "password"
             placeholder="Password"
             name="Password"
-            required
           >
-        </mat-form-field> -->
+        </mat-form-field>
+
         <mat-form-field>
           <input
             matInput
-            [(ngModel)]="updatedUser.Email"
+            [(ngModel)]="userData.Email"
             type = "email"
             placeholder="Email"
             name="Email"
-            required
           >
         </mat-form-field>
-        <mat-form-field>
-          <input
-            matInput
-            [(ngModel)]="updatedUser.Birthday"
-            type = "date"
-            placeholder="Birthday"  
-            name="Birthday"
-          >
-        </mat-form-field>
+        
       </form>
     </mat-card-content>
     <mat-card-actions>

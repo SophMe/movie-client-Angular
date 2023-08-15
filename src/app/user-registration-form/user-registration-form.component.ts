@@ -16,7 +16,8 @@ export class UserRegistrationFormComponent implements OnInit {
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
-    public snackBar: MatSnackBar ) {}   // display notifications back to the user
+    public snackBar: MatSnackBar,         // display notifications back to the user
+  ) {} 
 
   ngOnInit(): void {}
 
@@ -24,15 +25,17 @@ export class UserRegistrationFormComponent implements OnInit {
    * send form inputs to the backend
    */
   registerUser(): void {
-    this.fetchApiData.userRegistration(this.userData).subscribe(
-      (result: any) => {
-        this.dialogRef.close();
-        console.log(result);
-        this.snackBar.open('user registered successfully', 'OK', { duration: 2000 });
-      },
-      (result) => {
-        console.log(result);
-        this.snackBar.open(result, 'OK', { duration: 2000 });
-      }
+    this.fetchApiData.userRegistration(this.userData).subscribe((response) => {
+      this.dialogRef.close();
+      console.log(response);
+      this.snackBar.open('user registered successfully', 'OK', {
+        duration: 2000
+      });
+      window.location.reload();
+    },
+    (response) => {
+      console.log(response);
+      this.snackBar.open(response, 'OK', { duration: 2000 });
+    }
   )} 
 }
