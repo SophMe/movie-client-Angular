@@ -8,9 +8,8 @@ import { catchError, map } from 'rxjs/operators';
  */ 
 
 const apiUrl = 'https://nine0smovieapi-oyws.onrender.com/';
-@Injectable({                                   // decorator telling Angular that this service will be available everywhere (root)
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })             // decorator telling Angular that this service will be available everywhere (root)
+  
 export class FetchApiDataService {
   constructor(private http: HttpClient) {       // inject HttpClient module into constructor params to provide HttpClient to the entire class, making it available via this.http
   }
@@ -195,7 +194,7 @@ export class FetchApiDataService {
 
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
-      console.error('Some error occured:', error.error.message);
+      console.error('Some error occurred:', error.error.message);
     } else {
       console.error(
         `Error Status code ${error.status}, ` +
