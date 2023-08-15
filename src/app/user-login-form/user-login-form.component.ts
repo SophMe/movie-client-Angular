@@ -19,7 +19,7 @@ export class UserLoginFormComponent implements OnInit {
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
     public snackBar: MatSnackBar,   // display notifications back to the user
     private router: Router
-    ) {}
+  ) {}
 
   ngOnInit(): void {}
 

@@ -3,7 +3,7 @@
   <mat-card *ngFor="let movie of movies;" class="movie-card">         <!-- 'movies' is the variable with the empty array declared in 'movie-card.component' -->
     <mat-card-header>
       <mat-card-title class="card-title">{{movie.Title}}</mat-card-title>
-          <mat-card-subtitle class="card-title">Directed by: {{movie.Director.Name}}</mat-card-subtitle>
+          <mat-card-subtitle class="card-title">Directed by {{movie.Director.Name}}</mat-card-subtitle>
       </mat-card-header>
       <div class="image-container">
        <img class="movie-image" src={{movie.ImagePath}} alt= {{movie.Title}} />

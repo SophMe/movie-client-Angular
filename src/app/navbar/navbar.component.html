@@ -3,9 +3,8 @@
     <li><a routerLink="/welcome">Start</a></li>
     <li><a routerLink="/movies">Movies</a></li>
     <li *ngIf="isLoggedIn"><a routerLink="/profile">Profile</a></li>
-    <li>
+    <li *ngIf="isLoggedIn">
       <button
-        *ngIf="isLoggedIn"
         (click)="logout()"
         class="logout-button"
         routerLink="/welcome"
