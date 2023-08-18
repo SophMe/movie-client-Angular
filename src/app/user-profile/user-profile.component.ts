@@ -18,6 +18,7 @@ export class UserProfileComponent implements OnInit{
   favMovies: any[] = [];
 
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
+  @Input() updateUser= { Username: '', Email: '' };
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -50,22 +51,33 @@ export class UserProfileComponent implements OnInit{
   /**
    * send updated data to db and save it in localStorage
    */
-  editUserData(): void {  
-    this.fetchApiData.editUser(this.userData).subscribe((data) => {     // call the API to update the user data using the 
-      localStorage.setItem('user', JSON.stringify(data));
-      localStorage.setItem('Username', data.Username);
-      console.log(data);
+  updateUserData(): void {
+    this.fetchApiData.editUser(this.updateUser).subscribe((data) => {
       this.snackBar.open('User data successfully updated', 'OK', {
-        duration: 2000
+        duration: 2000,
       });
-      location.reload();       // reload page after successful update
-    },
-      (result) => {
-        this.snackBar.open(result, 'OK', {
-          duration: 2000
-        });
-      })
-  };
+      localStorage.setItem('user', JSON.stringify(data));
+      localStorage.setItem('username', data.Username);
+      this.fetchUser();             // instead of reloading the page
+    });
+  }
+
+  // editUserData(): void {  
+  //   this.fetchApiData.editUser(this.userData).subscribe((data) => {     // call the API to update the user data using the 
+  //     localStorage.setItem('user', JSON.stringify(data));
+  //     localStorage.setItem('username', data.Username);
+  //     console.log(data);
+  //     this.snackBar.open('User data successfully updated', 'OK', {
+  //       duration: 2000
+  //     });
+  //     location.reload();       // reload page after successful update
+  //   },
+  //     (result) => {
+  //       this.snackBar.open(result, 'OK', {
+  //         duration: 2000
+  //       });
+  //     })
+  // };
 
   /**
    * delete profile permanently and redirect to welcome page

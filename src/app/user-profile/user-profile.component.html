@@ -26,14 +26,14 @@
         <mat-form-field>
           <input
             matInput
-            [(ngModel)]="userData.Username"
+            [(ngModel)]="updateUser.Username"
             type="text"
             placeholder="Username"
             name="Username"
           >
         </mat-form-field>
 
-        <mat-form-field>
+        <!-- <mat-form-field>
           <input
             matInput
             [(ngModel)]="userData.Password"
@@ -41,12 +41,12 @@
             placeholder="Password"
             name="Password"
           >
-        </mat-form-field>
+        </mat-form-field> -->
 
         <mat-form-field>
           <input
             matInput
-            [(ngModel)]="userData.Email"
+            [(ngModel)]="updateUser.Email"
             type = "email"
             placeholder="Email"
             name="Email"
@@ -58,7 +58,7 @@
     <mat-card-actions>
         <button
           mat-raised-button
-          (click)="editUserData()"
+          (click)="updateUserData()"
           color="primary"
           class="btn-spacing"
         >
